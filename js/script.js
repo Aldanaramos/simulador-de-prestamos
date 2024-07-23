@@ -49,10 +49,20 @@
             let tasaInteres = prompt ( " ingrese la tasa de interes anual (%):");
             let plazoPrestamo = prompt ( "ingrese el plazo del prestamo (meses o años):");
             let tipoPlazo = prompt ("ingrese el tipo de plazo (meses/años):");
-            
+            alert ("Atencion! Al simular este prestamo tene en cuenta lo siguiente:-La tasa de interes anual es del ${tasaInteres}%.-El plazo del prestamo es de ${plazo}meses.-La cantidad total a pagar sera de $${montoTotal}.-La cuota mensual sera de $${cuotaMensual}.Estas seguro de continuar con la simulacion?.");
+            if (resultado) {
+                //continuar con la simulacion
+            } else{
+                //cancelar la simulacion
+
+            }
+
             // convertir la tasa de interes a decimal
             tasaInteres = tasaInteres / 100
             
+            
+
+
 
 
 
