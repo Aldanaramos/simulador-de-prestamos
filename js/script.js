@@ -2,38 +2,31 @@
 
 
     let titulo = document.getElementById("Title")
-    console.log(titulo)
-
-    //getElementysByClassName
     
+
 
     const calcular = document.getElementById(`calcular`);
     const montoTotalElement = document.getElementById(`monto-total`);
     const prestamo = document.getElementById("prestamo");
+    const plazo = document.getElementById('plazo');
 
-    calcular.addEventListener ("click", function() {
-        let total = 0 
+   
+        calcular.addEventListener ("click", function() {
+        const tasaInteres = parseFloat(document.getElementById(`tasaInteres`).value);
+        let montoTotal= 0;
         for (let i = 0; i < plazo; i++) {
-            const montoPrestamo = parseFloat (prestamos [i]("input[type= `number`]").value);
-            montoTotal += monto + (monto * interes / 100);
-            const tasaInteres = parseFloat(document.getElementById(`tasaInteres`).value);
-            const plazo = parseFloat(document.getElementById(`plazo`).value);
-            const montoMensual = CalcularMontoPagos(montoPrestamo, tasaInteres, plazo);
+            const montoPrestamo = parseFloat (prestamos [i].value);
+            montoTotal += montoPrestamo + (montoPrestamo * interes / 100);
         }
-        montoTotalElement.innerHTML = montototal`${montoTotal.toFixed(2)}`
+        montoTotalElement.innerHTML = `montototal:${montoTotal.toFixed(2)}`
     });
 
 
 
             // calcular el monto mensual a pagar 
             const resultado = document.getElementById(`resultado`)
-            calcular.addEventListener(`click`, function(event) {
-                event.preventDefault();
-                const montoPrestamo = parseFloat(document.getElementById(`montoPrestamo`).value);
-                const tasaInteres = parseFloat(document.getElementById(`tasaInteres`).value);
+            
 
-                const montoMensual = CalcularMontoPagos(montoPrestamo, tasaInteres, plazo);
-          })
             function CalcularMontoPagos(montoPrestamo, tasaInteres, plazo) {
                 let tasaMensual = tasaInteres / 12;
                 let numeroPagos = plazo * 12;
@@ -46,25 +39,27 @@
 
             const Calcular = document.getElementById(`calcular`);
             const resultadoTiempo = document.getElementById(`calcularResultado`);
+            const montoPrestamo = parseFloat(document.getElementById(`montoPrestamo`).value);
+            const tipoInteres = document.getElementById(`tipoInteres`);
+
+            const montoTotal = parseFloat(localStorage.getItem(`montoPrestamo`,montoPrestamo));
+
 
             calcular.addEventListener(`click`, function(event){
                 event.preventDefault();
-                const montoTotal = parseFloat(document.getElementById(`montoTotal`).value);
-                const montoPrestamo = parseFloat(document.getElementById(`montoPrestamo`).value);
-                const tipoInteres = parseFloat(document.getElementById(`tipoInteres`).value);
-                const tiempo = calcularTiempo (montoTotal, montoPrestamo, tipoInteres)       
-                resultadoTiempo.innerHTML = ElTiempoes;{tiempo};      
-            })
+                const tiempo = calcularTiempoPrestamo(montoTotal, montoPrestamo, tipoInteres)             
+            });
             function calcularTiempoPrestamo (montoTotal, montoPrestamo, tipoInteres) {
-                let tiempo = (montoTotal / montoPrestamo) / (1 + tipoInteres);
+                const tiempo = (montoTotal / montoPrestamo) / (1 + tipoInteres);
                 return tiempo;
             }
 
 
-            // arrays y objetos
+            // arrays 
 
 
-            const simulacion= {
+            const simulaciones= [
+                {
                 id:1, 
                 monto: 10000,
                 plazo: 12,
@@ -73,21 +68,8 @@
                 pagoMensual: 0,
                 totalInteres: 0,
                 totalPagar: 0
-            };
-            
-            calcularMontoPagos(simulacion);
-
-        function calcularMontoPagos(prestamo) {
-            let tasaMensual = (prestamo.interes / 100) / 12;
-            let numeroPagos = prestamo.plazo;
-            prestamo.pagoMensual = prestamo.monto * tasaMensual / (1 - Math.pow(1 + tasaMensual - numeroPagos));
-            prestamo.totalPagar = prestamo.pagoMensual * numeroPagos;
-            prestamo.totalInteres = prestamo.totalPagar - prestamo.monto;
-            
-        }
-        
-            
-            const sim = {
+            },
+            {
                 id:2,
                 monto: 20000,
                 plazo: 24,
@@ -97,12 +79,13 @@
                 totalInteres: 0,
                 totalPagar:0
                 
-            };
+            },
+            ]
 
             function calcularMontoPagos(prestamo) {
                 let tasaMensual = (prestamo.interes / 100) / 12;
                 let numeroPagos = prestamo.plazo;
-                if (prestamo.interes === `fijo`){
+                if (prestamo.interes === `fijo` || prestamo.tipoInteres === `variable`){
                     prestamo.pagoMensual = prestamo.monto * tasaMensual / (1 - Math.pow(1 + tasaMensual - numeroPagos));
 
                 } else{
@@ -113,6 +96,16 @@
                 prestamo.totalInteres = prestamo.totalPagar - prestamo.monto;
             }
 
+            // forEach para calcular los montos de pago
+
+            simulaciones.forEach(calcularMontoPagos);
+
+            // Filter
+
+            const prestamosFijos = simulaciones.filter((prestamo) => prestamo.tipoInteres === "fijo");
+            const prestamosVariables = simulaciones.filter((prestamo) => prestamo.tipoInteres === "variable")
+
+
 
             
             // definir montoRestante con el valor inicial del monto del prestamo
@@ -121,7 +114,7 @@
             const resultadoElement = document.getElementById(`resultado`);
             const iniciar = document.getElementById(`iniciar`);
 
-            let montoRestante = sim.monto;
+            let montoRestante = simulaciones.monto;
             let pagosRealizados = 0;
                 resultadoElement.innerHTML = ""; //limpiar el contenido del elemento
 
@@ -138,7 +131,7 @@
 
                 // solicitar informacion al usuario
 
-                const form= document.getElementById(`formulario-simulacion`);
+                const form = document.getElementById(`formulario-simulacion`);
                 const simular = document.getElementById(`simulacion`);
                 
                 form.addEventListener(`submut`, (e) =>{
@@ -147,15 +140,19 @@
                 });
 
 
-                const montoPrestamo = parseInt(document.getElementById(`montoPrestamo`).value);
                 const tasaInteres = parseInt(document.getElementById(`tasaInteres`).value);
+                localStorage.getItem(`tasaInteres`);
                 const plazoPrestamo = parseInt(document.getElementById(`plazoPrestamo`).value);
-                const tipoPlazo = document.getElementById(`tipoPlazo`).value
+                localStorage.getItem(`plazoPrestamo`);
+                const tipoPlazo = document.getElementById(`tipoPlazo`).value;
+                localStorage.getItem(`tipoPlazo`);
 
 
                 if (montoPrestamo && tasaInteres && plazoPrestamo && tipoPlazo) {
-                    const montoTotal = montoPrestamo * (1 + (tasaInteres / 100 ) * (tipoPlazo === `años`? plazoPrestamo : plazoPrestamo / 12));
-                    const cuotaMensual = montoTotal / (tipoPlazo === `años` ? plazoPrestamo * 12 : plazoPrestamo);
+                    const esAnual1 = tipoPlazo === `años`;
+                    const factorPlazo = esAnual1 ? 1 : 12;
+                    const montoTotal = montoPrestamo * (1 + (tasaInteres / 100 ) * ( plazoPrestamo / factorPlazo));
+                    const cuotaMensual = montoTotal / ( plazoPrestamo * factorPlazo);
                    
                     const h2Element = document.createElement(`h2`);
                     h2Element.textContent = `resultado:`;
@@ -183,11 +180,21 @@
                 const mensaje = document.getElementById(`mensaje`);
 
                 if (!montoPrestamo || !tasaInteres || !plazoPrestamo || !tipoPlazo){
-                   console.log("Lamentablmente no completaste todas las opciones");
-
+        
                 } else {
                     //codigo para mostrar el resultado
-                }
+                };
+
+                // localStorage: guardar datos de la simulacion de prestamos
+                localStorage.setItem(`montoPrestamo`,montoPrestamo);
+                localStorage.setItem(`tasaIntres`,tasaInteres);
+                localStorage.setItem(`plazoPrestamo`,plazoPrestamo);
+                localStorage.setItem(`tipoPlazo`,tipoInteres);
+
+                
+
+
+
                 
                 
 
