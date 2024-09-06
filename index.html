@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SweetAlert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- JS -->
      <script defer src="./js/script.js"></script>
+     <script defer src = "./js/script2.js"></script>
+    
+   
+
+
     <title>Segunda pre-entrega js</title>
     <link href="http://localhost/css/style.css" type="text/css" rel="stylesheet">
     <style>
@@ -37,35 +44,34 @@
     </style>
 </head>
 <body>
-    <h1 id="title">Pre entrega - Aldana Ramos</h1>
+    <h1 id="title">Simulador De Prestamos</h1>
     <p>Esta es una aplicacion para calcular diferentes opciones de prestamos 
         personales ofrecidos por un banco.</p>
         
 
       <form id = "formulario-simulacion">
-        <label for="montoPrestamo">Monto del prestamo:</label>
+        <label for="montoPrestamo">Monto del Prestamo:</label>
         <input type= "number" id="montoPrestamo" required>
-        <label for="tasaInteres">Tasa de interes(%):</label>
+        <label for="tasaInteres">Tasa de Interes(%):</label>
         <input type="number" id="tasaInteres"required>
-        <label for="plazo">Plazo:</label>
-        <input type = "number" id = "plazoPrestamo" required>
-        <label for = "tipoPlazo"> Tipo de plazo:</label>
-        <select id="tipoPlazo" required>
-            <option value="meses">Meses</option>\
-            <option value="años">Años</option>
+        <span id="monto-total"></span>
+        <label for="tipoPlazo">Tipo de Plazo</label>
+        <select id="tipoPlazo">
+          <option value = "meses">Meses</option>
+          <option value="años">Años</option>
         </select>
       
       </form>
-
+      <button id="calcular">calcular</button>
       <div id="resultados-simulacion"></div>
       <div class="prestamo">
         <!--inputs y otros elementos-->
     </div>
-    <button id="calcular">calcular</button>
     <div id = resultado></div>
-   
+    <div id = "container"></div>
+    
 
-    <p id="monto-total"></p>
+   
 
  
 

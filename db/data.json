@@ -1,0 +1,23 @@
+[
+    {
+    "id":1, 
+   " monto": 10000,
+   " plazo": 12,
+    "interes": 10,
+    "tipoInteres":"fijo",
+   " pagoMensual": 0,
+   " totalInteres": 0,
+    "totalPagar": 0
+},
+{
+    "id":2,
+    "monto": 20000,
+   " plazo": 24,
+   " interes": 12,
+    "tipoInteres": "variable",
+    "pagoMensual": 0,
+    "totalInteres": 0,
+    "totalPagar":0
+    
+}
+]
