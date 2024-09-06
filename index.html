@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SweetAlert-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- JS -->
-     <script defer src="./js/script.js"></script>
-     <script defer src = "./js/script2.js"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
    
+
+    <!--> JS -->
+     <script defer src = "./js/script2.js"></script>
+     <script defer src="./js/calculo.js"></script>
+     <script defer src="./js/plazo.js"></script>
+     <script defer src="./js/resultado.js"></script>
 
 
     <title>Segunda pre-entrega js</title>
     <link href="http://localhost/css/style.css" type="text/css" rel="stylesheet">
+
     <style>
       body{
         font-family: sans-serif;
@@ -34,10 +35,13 @@
         color: blue ;
       }
       div{
+        display: flex;
+        flex-direction: column;
         color: gray;
       }
       button{
         font-size: 20px;
+        margin-bottom: 10px;
         text-align: center;
         font-weight: bold;
       }
@@ -52,22 +56,24 @@
       <form id = "formulario-simulacion">
         <label for="montoPrestamo">Monto del Prestamo:</label>
         <input type= "number" id="montoPrestamo" required>
-        <label for="tasaInteres">Tasa de Interes(%):</label>
-        <input type="number" id="tasaInteres"required>
-        <span id="monto-total"></span>
+        <label for="Interes"> Interes(%):</label>
+        <input type="number" id="tasaInteres"required="">
+        <input type="number" id="plazo"
         <label for="tipoPlazo">Tipo de Plazo</label>
+        <span id="monto-total"></span>
         <select id="tipoPlazo">
           <option value = "meses">Meses</option>
           <option value="años">Años</option>
         </select>
       
       </form>
+      <div>
       <button id="calcular">calcular</button>
-      <div id="resultados-simulacion"></div>
+      <span id="monto-total"></span>
+      </div>
       <div class="prestamo">
         <!--inputs y otros elementos-->
     </div>
-    <div id = resultado></div>
     <div id = "container"></div>
     
 
@@ -75,7 +81,7 @@
 
  
 
-
-
+<!-- SweetAlert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>

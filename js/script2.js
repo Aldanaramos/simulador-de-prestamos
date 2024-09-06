@@ -1,3 +1,14 @@
+document.getElementById("title")
+
+    //sweetAlert
+
+    Swal.fire({
+        title: "Bienvenido a la simulacion de prestamo",
+        text: "Ingrese los datos",
+        icon: "info"
+      });
+
+
 
             const resultado = document.getElementById(`resultado`)
             
@@ -6,9 +17,8 @@
                 let numeroPagos = plazo * 12;
                 let montoMensual = montoPrestamo * tasaMensual / (1 - Math.pow(1 + tasaMensual - numeroPagos))
                             return montoMensual;
-                }
+            }
 
-                
             function calcularMontoPagos(prestamo) {
                 let tasaMensual = (prestamo.interes / 100) / 12;
                 let numeroPagos = prestamo.plazo;
@@ -40,14 +50,14 @@
             const resultadoElement = document.getElementById(`resultado`);
             const iniciar = document.getElementById(`iniciar`);
 
-    
+
+            let prestamo={monto:1000}
             let montoRestante = prestamo?.monto;
             let pagosRealizados = 0;
-                resultadoElement.innerHTML = ""; //limpiar el contenido del elemento
 
                 const intervalid = setInterval(function(){
                     if (montoRestante > 0){
-                        montoRestante -= sim.pagoMensual;
+                        montoRestante -= pres.pagoMensual;
                         pagosRealizados++;
                      } else {
                         clearInterval(intervalid);
